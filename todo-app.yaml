@@ -73,7 +73,7 @@ kind: Deployment
 metadata:
   name: go-server
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: go-server
@@ -139,10 +139,11 @@ metadata:
   name: todo-ingress
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
+    traefik.ingress.kubernetes.io/router.priority: "10"
 spec:
-  ingressClassName: traefik
   rules:
-  - http:
+  - host: todo.local
+    http:
       paths:
       - path: /
         pathType: Prefix
